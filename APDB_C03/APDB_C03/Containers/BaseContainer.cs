@@ -18,5 +18,5 @@ public abstract class BaseContainer
     }
 
     public abstract void emptyLoad();
-    public abstract void addLoad(double load);
+    public abstract void addLoad(double addedLoad);
 }
