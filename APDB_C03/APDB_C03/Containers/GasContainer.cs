@@ -5,21 +5,21 @@ namespace APDB_C03.Containers;
 
 public class GasContainer : BaseContainer, IHazardNotifier
 {
-    private static int Id = 1;
-    private double Psi { get; set; }
-    public GasContainer(double maxLoad, double weigth, double heigth, double depth) : base(maxLoad, weigth, heigth, depth)
+    private static int _id = 1;
+    public double Psi { get; }
+    public GasContainer(double maxLoad, double weight, double height, double depth) : base(maxLoad, weight, height, depth)
     {
-        SerialNum += "-G-" + Id;
-        Id++;
+        SerialNum += "-G-" + _id;
+        _id++;
     }
 
-    public override void emptyLoad()
+    public override void EmptyLoad()
     {
         Load *= 0.05;
         Console.WriteLine("Container emptied.");
     }
 
-    public override void addLoad(double addedLoad)
+    public override void AddLoad(double addedLoad)
     {
         var newLoad = Load + addedLoad;
         

@@ -1,22 +1,14 @@
 ﻿namespace APDB_C03.Containers;
 
-public abstract class BaseContainer
+public abstract class BaseContainer(double maxLoad, double weight, double height, double depth)
 {
-    protected double MaxLoad { get; }
-    protected double Weigth { get; }
-    protected double Heigth { get; }
-    protected double Depth { get; }
-    protected double Load { get; set; } = 0;
-    protected string SerialNum { get; set; } = "KON";
+    public double MaxLoad { get; } = maxLoad;
+    public double Weight { get; } = weight;
+    public double Height { get; } = height;
+    public double Depth { get; } = depth;
+    public double Load { get; set; }
+    public string SerialNum { get; set; } = "KON";
 
-    protected BaseContainer(double maxLoad, double weigth, double heigth, double depth)
-    {
-        MaxLoad = maxLoad;
-        Weigth = weigth;
-        Heigth = heigth;
-        Depth = depth;
-    }
-
-    public abstract void emptyLoad();
-    public abstract void addLoad(double addedLoad);
+    public abstract void EmptyLoad();
+    public abstract void AddLoad(double addedLoad);
 }

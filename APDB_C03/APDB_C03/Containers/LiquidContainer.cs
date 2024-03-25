@@ -5,36 +5,37 @@ namespace APDB_C03.Containers;
 
 public class LiquidContainer : BaseContainer, IHazardNotifier
 {
-    private static int Id = 1;
-    private static String[] DangeousTypes = {"paliwo"};
-    private string LoadType { get; }
-    private bool IsDangeous { get; set; } = false;
+    private static int _id = 1;
+    private static readonly string[] DangerousTypes = {"paliwo"};
+    public string LoadType { get; private set; }
+    public bool IsDangerous { get; }
 
-    public LiquidContainer(double maxLoad, double weigth, double heigth, double depth, string loadType) : base(maxLoad, weigth, heigth, depth) 
+    public LiquidContainer(double maxLoad, double weight, double height, double depth, string loadType) : base(maxLoad, weight, height, depth) 
     {
         LoadType = loadType;
+        IsDangerous = false;
         
-        foreach (var type in DangeousTypes)
-            if (loadType.Equals(type)) IsDangeous = true;
+        foreach (var type in DangerousTypes)
+            if (loadType.Equals(type)) IsDangerous = true;
         
-        SerialNum += "-L-" + Id;
-        Id++;
+        SerialNum += "-L-" + _id;
+        _id++;
     }
 
-    public override void emptyLoad()
+    public override void EmptyLoad()
     {
         Load = 0;
         Console.WriteLine("Container emptied.");
     }
 
-    public override void addLoad(double addedLoad)
+    public override void AddLoad(double addedLoad)
     {
         var newLoad = Load + addedLoad;
         
         if (newLoad > MaxLoad)
             throw new OverfillException();
         
-        if (IsDangeous && newLoad > MaxLoad*0.5)
+        if (IsDangerous && newLoad > MaxLoad*0.5)
             NotifyHazard("Exceeded load capacity for dangerous loads (50%). Operation blocked.");
         else if (newLoad > MaxLoad*0.9)
             NotifyHazard("Exceeded load capacity (90%). Operation blocked.");
