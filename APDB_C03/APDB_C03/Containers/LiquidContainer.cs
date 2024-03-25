@@ -1,5 +1,4 @@
-﻿using System.Transactions;
-using APDB_C03.Exceptions;
+﻿using APDB_C03.Exceptions;
 using APDB_C03.Interfaces;
 
 namespace APDB_C03.Containers;
@@ -25,6 +24,7 @@ public class LiquidContainer : BaseContainer, IHazardNotifier
     public override void emptyLoad()
     {
         Load = 0;
+        Console.WriteLine("Container emptied.");
     }
 
     public override void addLoad(double addedLoad)
